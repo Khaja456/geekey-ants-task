@@ -1,0 +1,37 @@
+.each-event-slot {
+  display: flex;
+  align-items: center;
+}
+
+.harizontal-line {
+  width: 95%;
+  margin: 0px;
+}
+
+.time-slot {
+  display: inline-flex;
+  width: 65px;
+  color: #0b78c5;
+  justify-content: space-between;
+  font-weight: 600;
+  padding-right: 15px;
+  margin: 0px;
+}
+
+.button-each-slot{
+    background: none;
+    border: none;
+    width: 100%;
+    min-height: 50px;
+    padding-left:65px;
+}
+
+.card-body-custom{
+  padding: 5px;
+  background-color: #2196f3;
+}
+
+.card-custom {
+  display: flex;
+  flex-wrap: wrap;
+}
