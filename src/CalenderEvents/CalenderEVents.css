@@ -18,20 +18,22 @@
   margin: 0px;
 }
 
-.button-each-slot{
-    background: none;
-    border: none;
-    width: 100%;
-    min-height: 50px;
-    padding-left:65px;
+.button-each-slot {
+  background: none;
+  border: none;
+  width: 100%;
+  min-height: 50px;
+  padding-left: 65px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.card-body-custom{
+.card-body-custom {
   padding: 5px;
   background-color: #2196f3;
 }
 
-.card-custom {
-  display: flex;
-  flex-wrap: wrap;
+.meeting-buttons {
+  border: none;
+  padding: 0px;
 }

@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import { timeSlots } from '../Utils';
 
 import './CalenderEVents.css';
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export function CalenderEvents() {
@@ -22,7 +21,7 @@ export function CalenderEvents() {
     };
 
     const modalLoaded = () => {
-        setmodalTitle("Modal Ready");
+        setmodalTitle("Create New Meeting");
     };
 
     const handleChange = (e) => {
@@ -33,7 +32,6 @@ export function CalenderEvents() {
         }));
     };
 
-
     const addEventToSlot = (e) => {
 
         const [eventTime, eventSlot] = e.target.value.split('-');
@@ -42,6 +40,11 @@ export function CalenderEvents() {
 
         setSlotDetails({ time: Number(eventTime), slot: eventSlot });
         showModal();
+    };
+
+    const editMeeting = (e, eventIndex) => {
+        console.log("Click is working!!!", eventIndex, e.taget);
+        e.stopPropagation();
     };
 
     const saveSlotDetails = () => {
@@ -75,8 +78,8 @@ export function CalenderEvents() {
 
     return (
         <div>
-            {allTimeSlots.map(({ time, slot, events }, index) => (
-                <div key={`sample-id${index}${time}`}>
+            {allTimeSlots.map(({ time, slot, events }, slotIndex) => (
+                <div key={`sample-id${slotIndex}${time}`}>
                     <div className="each-event-slot">
                         <p className="time-slot">
                             <span>{time}</span><span>{slot}</span>
@@ -86,18 +89,16 @@ export function CalenderEvents() {
                     <button className="button-each-slot" value={`${time}-${slot}`} onClick={(e) => { addEventToSlot(e) }}>
                         {
                             events && events.length &&
-                            <div className="card-custom">
-                                {events.map(({ from, fromSlot, toSlot, title }, index) => (
-                                    <div className="col-sm-2" key={index}>
-                                        <div className="card">
-                                            <div className="card-body card-body-custom">
-                                                <h6 className="card-title">{title}</h6>
-                                                <p className="card-text">{`${from} ${fromSlot} to ${toSlot}`}</p>
-                                            </div>
+                            events.map(({ from, fromSlot, toSlot, title }, eventIndex) => (
+                                <div className="col-sm-2 meeting-buttons" value={`${slotIndex}-${eventIndex}`} key={eventIndex} onClick={(e, eventIndex) => { editMeeting(e, eventIndex) }}>
+                                    <div className="card">
+                                        <div className="card-body card-body-custom">
+                                            <h6 className="card-title">{title}</h6>
+                                            <p className="card-text">{`${from} ${fromSlot} to ${toSlot}`}</p>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))
                         }
                     </button>
                 </div>
@@ -117,11 +118,11 @@ export function CalenderEvents() {
                                 <label htmlFor="exampleSelect">Time</label>
                                 <select className="form-control" id="exampleSelect" name="slotValue" value={slotDetails.slotValue || ''} onChange={handleChange}>
                                     <option>----</option>
-                                    <option>12 AM</option>
-                                    <option>1 AM</option>
-                                    <option>2 AM</option>
-                                    <option>3 AM</option>
-                                    <option>4 AM</option>
+                                    {
+                                        timeSlots.map(({ time, slot }, index) => (
+                                            <option key={`${time}-${index}`}>{`${time} ${slot}`}</option>
+                                        ))
+                                    }
                                 </select>
                             </div>
                         </form>
